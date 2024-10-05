@@ -13,7 +13,7 @@ const Pagina2 = () => {
     const json = JSON.stringify({ att1: inputValue });
     console.log("parametros: "+json.toString)
     try {
-      const response = await fetch('/api/hello', {
+      const response = await fetch('/api/hello1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ const Pagina2 = () => {
         body: json,
       });
       const data = await response.json();
-      setResponseMessage(data.message);
+      setResponseMessage(">"+data.message+"sss");
     } catch (error) {
       console.error('Error sending data to API:', error);
       setResponseMessage('An error occurred while sending the data.');
@@ -30,7 +30,7 @@ const Pagina2 = () => {
 
   return (
     <div>
-      <h1>Inserta en Mysql en el api hello</h1>
+      <h1>Send JSON to API</h1>
       <input type="text" value={inputValue} onChange={handleChange} />
       <button onClick={sendJsonToApi}>Send to API</button>
 

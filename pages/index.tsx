@@ -4,6 +4,53 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Pagina1 from './pagina1';
 import Pagina2 from './pagina2'; // Import Pagina2
+import mysql from 'mysql2/promise';
+
+// Replace these with your actual database credentials
+const dbConfig = {
+  host: 'gldz1.dailyrazor.com',
+  user: 'alsoft_portal',
+  password: 'Etrust2011',
+  database: 'alsoft_bitco',
+};
+
+let connection: mysql.Connection | null = null;
+export async function connectToDatabase() {
+  if (!connection) {
+    connection = await mysql.createConnection(dbConfig);
+    console.log('Connected to MySQL database!');
+  }
+  return connection;
+}
+
+export async function executeQuery(query: string) {
+  const conn = await connectToDatabase();
+  try {
+    const [rows] = await conn.execute(query);
+    return rows;
+  } catch (error) {
+    console.error('Error executing query:', error);
+    throw error;
+  }
+}
+
+
+// Example usage:
+async function sql1() {
+  const connection = await connectToMySQL();
+  try {
+    // You can now execute queries using the connection
+    // Example:
+    const [rows] = await connection.execute('SELECT * FROM your_table');
+    console.log('Data from table:', rows);
+    // Close the connection when you're done
+    await connection.end();
+  } catch (error) {
+    console.error('Error executing query:', error);
+    await connection.end();
+  }
+}
+
 
 const Home: NextPage = () => {
   return (
@@ -29,7 +76,12 @@ const Home: NextPage = () => {
           </a>
 
           <a href="/pagina2" className={styles.card}>
-            <h2>Go to Pagina2 &rarr;</h2>
+            <h2>Go to Mysql insert &rarr;</h2>
+            <p>This is the link to the other page!</p>
+          </a>
+
+          <a href="/pagina3" className={styles.card}>
+            <h2>Go to Mysql select &rarr;</h2>
             <p>This is the link to the other page!</p>
           </a>
 
