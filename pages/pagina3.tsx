@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { executeQuery } from './index'; // Or import from utils/database
+import MyComponent from '../components/MyComponent'; // Assuming 'MyComponent.jsx' is in your 'components' directory
 
 const Pagina2 = () => {
   const [inputValue, setInputValue] = useState('');
@@ -43,22 +44,24 @@ const Pagina2 = () => {
         </div>
       )}
 
-      {/* Table to display data */}
+      {/* Scrollable div for table data */}
       {tableData.length > 0 && (
-        <table style={{border:'1px solid black'}}>
-          <thead>
-            <tr>
-              <th>f1</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((row, index) => (
-              <tr key={index}>
-                <td>{row.f1}</td>
+        <div style={{ overflowY: 'auto', height: '200px' }}> 
+          <table style={{border:'1px solid black'}}>
+            <thead>
+              <tr>
+                <th>f1</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {tableData.map((row, index) => (
+                <tr key={index}>
+                  <td>{row.f1}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

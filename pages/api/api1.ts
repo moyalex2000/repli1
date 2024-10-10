@@ -13,14 +13,7 @@ export default async function handler(
     const data = req.body;
     if (data.att1) {
       console.log(`Received att1: ${data.att1}`);
-      try {
-        // ... Your API logic ...
-        const result = await executeQuery(`INSERT INTO t1 VALUES ('${data.att1}')`);
-        res.status(200).json({ message: 'Data inserted successfully' });
-      } catch (error) {
-        console.error('Error executing query:', error);
-        res.status(500).json({ message: 'Internal server error' });
-      }
+      res.status(200).json({ message: `Data: ${data.att1}` });
     } else {
       res.status(400).json({ message: 'Please provide att1 in the request body.' });
     }

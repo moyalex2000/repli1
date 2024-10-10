@@ -71,7 +71,7 @@ const Home: NextPage = () => {
 
         <div className={styles.grid}>
           <a href="/pagina1" className={styles.card}>
-            <h2>Go to Pagina1 &rarr;</h2>
+            <h2>Test call to api1</h2>
             <p>This is the link to the other page!</p>
           </a>
 
